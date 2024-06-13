@@ -1,0 +1,54 @@
+<odoo>
+
+    <!-- View for Routes Selection -->
+    <record id="factures_salesperson_routes_selection_view_form" model="ir.ui.view">
+        <field name="name">factures.salesperson.routes.selection.form</field>
+        <field name="model">factures.salesperson.routes.selection</field>
+        <field name="arch" type="xml">
+            <form string="Quotation selection" create="false">
+                <group>
+                    <group>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                        <field name="salesperson_route_id" options="{'no_create': True}"/>
+                    </group>
+                    <notebook>
+                        <page string="Quotations selected">
+                            <field name="selected_quotations"/>
+                        </page>
+                    </notebook>
+                </group>
+                <footer>
+                    <button string="Print" type="object" name="print_report" class="oe_highlight"/>
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="report_salesperson_routes_partner" model="ir.actions.report">
+        <field name="name">salesperson Routes Partner</field>
+        <field name="model">factures.salesperson.routes.selection</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">factures.report_factures_salesperson_routes_group_by_partner</field>
+        <field name="report_file">factures.report_factures_salesperson_routes_group_by_partner</field>
+        <field name="print_report_name">'%s - %s to %s' % ((object.salesperson_route_id.name).replace('/',''), object.start_date.strftime("%d-%m-%Y-"), object.end_date.strftime("%d-%m-%Y-"))</field> 
+        <field name="binding_model_id" ref="model_factures_salesperson_routes_selection"/>
+    </record>
+
+    <record id="factures_salesperson_routes_selection_action" model="ir.actions.act_window">
+        <field name="name">Routes</field>
+        <field name="res_model">factures.salesperson.routes.selection</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Menu Item for Creating Routes -->
+    <record id="factures_salesperson_routes_selection_menuitem" model="ir.ui.menu">
+        <field name="name">Imprimir Routes</field>
+        <field name="action" ref="factures_salesperson_routes_selection_action"/>
+        <field name="sequence" eval="10"/>
+        <field name="parent_id" ref="menu_factures_salesperson_routes_see"/>
+    </record>
+</odoo>
+

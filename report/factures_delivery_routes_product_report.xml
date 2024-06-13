@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<odoo>
+    <template id="report_factures_delivery_routes_group_by_product">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+            <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <h2>
+                        <strong>
+                            <span t-field="o.route_id"/>
+                            <span t-esc="o.date.strftime('%d-%m-%Y')"/>
+                        </strong>
+                    </h2>
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Quantities</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Iterate over the dictionary returned by _get_product_quantities() -->
+                            <t t-foreach="o.group_by_product()" t-as="product">
+                                <!-- Unpack the tuple (product_id, product_name) -->
+                                <tr>
+                                    <td>
+                                        <span t-esc="product[0][1]"/> <!-- Display product_name -->
+                                    </td>
+                                    <td>
+                                        <!-- Iterate over the inner dictionary {partner_id: quantity} -->
+                                        <t t-foreach="product[1]" t-as="partner_id_quantity">
+                                            <!-- Display partner_id and quantity -->
+                                            <span t-esc="partner_id_quantity[0]"/>: <span t-esc="partner_id_quantity[1]"/>
+                                            <br/>
+                                        </t>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+                <style>
+                    .page {
+                        page-break-after: always;
+                    }
+                </style>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

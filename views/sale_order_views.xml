@@ -1,0 +1,52 @@
+<odoo>
+    <!-- View order form inheritance -->
+    <record id="view_order_form_inherit" model="ir.ui.view">
+        <field name="name">sale.view.quotation.tree.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+
+            <!-- Insert payment method and discount Albara fields after payment term -->
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="payment_method" string="Payment method" readonly="0" options="{'no_create': True}" />
+                <field name="discount_albara" string="Discount Albara" widget="percentage" style="width:15%" readonly="state in ('sale', 'cancel')" />
+            </xpath>
+            
+            <!-- Insert display_discount field inside the order_line field after the discount field -->
+            <xpath expr="//field[@name='order_line']/tree/field[@name='discount']" position="after">
+                <field name="display_discount" string="%DTE." readonly="1" groups="product.group_discount_per_so_line" optional="show"/>             
+            </xpath>
+            <!-- Make the field discount inside the order_line field invisible-->
+            <xpath expr="//field[@name='order_line']/tree/field[@name='discount']" position="attributes">
+                <!-- <attribute name="invisible">1</attribute> -->
+                <!-- <attribute name="optional">hide</attribute>
+                <attribute name="column_invisible">1</attribute> -->
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Sale order tree view inheritance -->
+    <record id="view_order_tree_inherit" model="ir.ui.view">
+        <field name="name">sale.view.quotation.tree.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="arch" type="xml">
+            <!-- Insert payment method field after validity date -->
+            <xpath expr="//field[@name='validity_date']" position="after">
+                <field name="payment_method" readonly="0" options="{'no_create': True}" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="sale_order_inherited_tree_view" model="ir.ui.view">
+           <field name="name">sale.order.view.tree.inherit</field>
+           <field name="model">sale.order</field>
+           <field name="inherit_id" ref="sale.view_quotation_tree"/>
+           <field name="arch" type="xml">
+               <xpath expr="//tree" position="attributes">
+                   <attribute name="js_class">button_in_tree</attribute>
+               </xpath>
+           </field>
+       </record>
+
+</odoo>

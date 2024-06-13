@@ -1,0 +1,74 @@
+<odoo>
+    <!-- View for Factures Routes Tree -->
+    <record id="view_factures_salesperson_routes_tree" model="ir.ui.view">
+        <field name="name">factures.salesperson.routes.tree</field>
+        <field name="model">factures.salesperson.routes</field>
+        <field name="arch" type="xml">
+            <tree string="Factures Routes">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="salesperson_id"/>
+                <field name="active" widget="boolean_toggle"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- View for Factures Routes Form -->
+    <record id="view_factures_salesperson_routes_form" model="ir.ui.view">
+        <field name="name">factures.salesperson.routes.form</field>
+        <field name="model">factures.salesperson.routes</field>
+        <field name="arch" type="xml">
+            <form string="Factures Routes">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="salesperson_id"/>
+                        <field name="description"/>
+                        <field name="active" widget="boolean_toggle"/>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- search view for routes-->
+    <record id="view_factures_salesperson_routes_search" model="ir.ui.view">
+        <field name="name">factures.salesperson.routes.search</field>
+        <field name="model">factures.salesperson.routes</field>
+        <field name="arch" type="xml">
+            <search string="Routes for salesperson">
+            <!--When searching for the name, also search for the code-->
+                <field name="name" string="Name" filter_domain="['|',('name','ilike',self),('code','ilike',self)]"/>
+                <field name="salesperson_id" string="Salesperson" filter_domain="['|',('salesperson_id','ilike',self),('salesperson_id','ilike',self)]"/>
+                <field name="active" string="Active" filter_domain="['|',('active','=',True),('active','=',False)]"/>
+                
+                <filter string="Name" name="name" domain="['|',('name','ilike',self),('code','ilike',self)]"/>
+            </search>
+        </field>
+    </record>
+    <!-- Action for Factures Routes -->
+    <record id="factures_salesperson_routes_action" model="ir.actions.act_window">
+        <field name="name">Routes</field>
+        <field name="res_model">factures.salesperson.routes</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_factures_salesperson_routes_search"/>
+        <field name="context">{'active_test': False}</field>
+    </record>
+
+    <record id="menu_factures_salesperson_routes_see" model="ir.ui.menu">
+        <field name="name">Salesperson routes</field>
+        <field name="parent_id" ref="menu_factures_routes"/>
+        <field name="sequence" eval="5"/>
+        <field name="action" ref="factures_salesperson_routes_action"/>
+    </record>
+
+    <!-- Menu Item for Factures Routes -->
+    <record id="factures_salesperson_routes_menuitem" model="ir.ui.menu">
+        <field name="name">Configurar Routes</field>
+        <field name="action" ref="factures_salesperson_routes_action"/>
+        <field name="sequence" eval="15"/>
+        <field name="parent_id" ref="menu_factures_salesperson_routes_see"/>
+    </record>
+</odoo>

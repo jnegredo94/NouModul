@@ -1,0 +1,15 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_factures_discounts_search,access.factures.discounts.search,factures.model_factures_discounts_search,base.group_user,1,1,1,1
+access_factures_quotations_selection,access.factures.quotations.selection,factures.model_factures_quotations_selection,base.group_user,1,1,1,1
+access_factures_invoice_confirmation,access.factures.invoice.confirmation,factures.model_factures_invoice_confirmation,base.group_user,1,1,1,1
+access_factures_invoice_temp,access.factures.invoice.temp,factures.model_factures_invoice_temp,base.group_user,1,1,1,1
+access_factures_delivery_routes_partial_delivery,access.factures.delivery.routes.partial.delivery,factures.model_factures_delivery_routes_partial_delivery,base.group_user,1,1,1,1
+access_factures_delivery_routes,access.factures.delivery.routes,factures.model_factures_delivery_routes,base.group_user,1,1,1,1
+access_factures_delivery_routes_selection,access.factures.routes.selection,factures.model_factures_delivery_routes_selection,base.group_user,1,1,1,1
+access_factures_delivery_routes_generated,access.factures.routes.generated,factures.model_factures_delivery_routes_generated,base.group_user,1,1,1,1
+access_sale_order,access.sale.order,sale.model_sale_order,base.group_user,1,1,1,1
+access_factures_salesperson_routes,access.factures.salesperson.routes,factures.model_factures_salesperson_routes,base.group_user,1,1,1,1
+access_factures_salesperson_history,access.factures.salesperson.history,factures.model_factures_salesperson_history,base.group_user,1,1,1,1
+access_factures_salesperson_history_line,access.factures.salesperson.history.line,factures.model_factures_salesperson_history_line,base.group_user,1,1,1,1
+access_factures_salesperson_routes_selection,access.factures.salesperson.routes.selection,factures.model_factures_salesperson_routes_selection,base.group_user,1,1,1,1
+access_factures_payment_generation,access.factures.payment.generation,factures.model_factures_payment_generation,base.group_user,1,1,1,1

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- View for Quotation Selection -->
+    <record id="factures_quotations_selection_view_form" model="ir.ui.view">
+        <field name="name">factures.quotations.selection.form</field>
+        <field name="model">factures.quotations.selection</field>
+        <field name="arch" type="xml">
+            <form string="Quotation selection" create="false">
+                <group>
+                    <group>
+                        <!-- Fields for selecting date range -->
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                        <field name="total_days"/>
+                    </group>
+                    <notebook>
+                        <page string="Quotations selected">
+                            <!-- Field for displaying selected quotations -->
+                            <field name="selected_quotations"/>
+                        </page>
+                    </notebook>
+                </group>
+                <footer>
+                    <!-- Buttons for confirming or canceling selection -->
+                    <button string="Select" type="object" name="confirm_selection" class="oe_highlight"/>
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action for Quotation Selection -->
+    <record id="factures_quotations_selection_action" model="ir.actions.act_window">
+        <field name="name">Quotation selection</field>
+        <field name="res_model">factures.quotations.selection</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field> <!-- Open in a new window -->
+    </record>
+
+    <!-- Menu Item for Quotation Selection -->
+    <record id="factures_quotations_selection_menuitem" model="ir.ui.menu">
+        <field name="name">Generar factures</field>
+        <field name="action" ref="factures_quotations_selection_action"/>
+        <field name="parent_id" ref="sale.sale_menu_root"/>
+    </record>
+</odoo>

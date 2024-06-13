@@ -1,0 +1,28 @@
+<odoo>
+
+    <!-- View for Routes Selection -->
+    <record id="factures_delivery_routes_partial_delivery_view_form" model="ir.ui.view">
+        <field name="name">factures.delivery.routes.partial.delivery.form</field>
+        <field name="model">factures.delivery.routes.partial.delivery</field>
+        <field name="arch" type="xml">
+            <form string="Quotation selection" create="false">
+                <group>
+                    <field name="parent_id" invisible="1"/>
+                    <field name="selected_quotations" options="{'no_create': True, 'no_create_edit':false}"/>
+                </group>
+                <footer>
+                    <button string="Mark as delivered" type="object" name="confirm_selection" class="oe_highlight"/>
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="factures_delivery_routes_partial_delivery" model="ir.actions.act_window">
+        <field name="name">Partial delivery</field>
+        <field name="res_model">factures.delivery.routes.partial.delivery</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

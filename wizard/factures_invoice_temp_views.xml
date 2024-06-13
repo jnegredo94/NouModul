@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree View -->
+    <record id="factures_invoice_temp_view_form" model="ir.ui.view">
+        <field name="name">factures.invoice.temp.tree</field>
+        <field name="model">factures.invoice.temp</field>
+        <field name="arch" type="xml">
+            <tree string="Invoice temp">
+                <field name="partner_id"/>
+                <field name="total_amount"/>
+                <field name="payment_method_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="factures_invoice_temp_view_tree" model="ir.ui.view">
+        <field name="name">factures.invoice.temp.form</field>
+        <field name="model">factures.invoice.temp</field>
+        <field name="arch" type="xml">
+            <form string="Invoice temp">
+                <group>
+                    <field name="partner_id"/>
+                    <field name="total_amount"/>
+                    <field name="payment_method_id"/>
+                </group>
+                <notebook>
+                    <page name="Quotations" string="Quotations">
+                        <field name="invoice_quotations" readonly="1"/>
+                    </page>
+                </notebook>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="factures_invoice_temp_action" model="ir.actions.act_window">
+        <field name="name">Invoice temp</field>
+        <field name="res_model">factures.invoice.temp</field>
+        <field name="view_mode">tree</field>
+    </record>
+</odoo>

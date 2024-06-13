@@ -1,0 +1,53 @@
+<odoo>
+
+    <!-- View for Routes Selection -->
+    <record id="factures_delivery_routes_selection_view_form" model="ir.ui.view">
+        <field name="name">factures.delivery.routes.selection.form</field>
+        <field name="model">factures.delivery.routes.selection</field>
+        <field name="arch" type="xml">
+            <form string="Quotation selection" create="false">
+                <group>
+                    <group>
+                        <field name="date"/>
+                        <field name="route_id"  options="{'no_create': True}"/>
+                    </group>
+                    <notebook>
+                        <page string="Quotations selected">
+                            <field name="selected_quotations" options="{'no_create': True, 'no_create_edit':false}"/>
+                        </page>
+                    </notebook>
+                </group>
+                <footer>
+                    <button string="Select" type="object" name="group_quotations" class="oe_highlight"/>
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action to Create Routes -->
+    <record id="action_create_routes" model="ir.actions.server">
+        <field name="name">Create routes</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="model_factures_delivery_routes_selection"/>
+        <field name="state">code</field>
+        <field name="code">
+            model.group_quotations()
+        </field>
+    </record>
+
+    <record id="factures_delivery_routes_selection_action" model="ir.actions.act_window">
+        <field name="name">Quotation selection</field>
+        <field name="res_model">factures.delivery.routes.selection</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Menu Item for Creating Routes -->
+    <record id="factures_delivery_routes_selection_menuitem" model="ir.ui.menu">
+        <field name="name">Generar routes</field>
+        <field name="action" ref="factures_delivery_routes_selection_action"/>
+        <field name="sequence" eval="10"/>
+        <field name="parent_id" ref="menu_factures_delivery_routes_see"/>
+    </record>
+</odoo>

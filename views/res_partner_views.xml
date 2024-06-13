@@ -1,0 +1,45 @@
+<odoo>
+    <!-- Inherited form view res.partner -->
+    <record id="view_res_partner_form_inherit" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <!-- Add Payment Day field after property_payment_method_id -->
+            <field name="property_supplier_payment_term_id" position="after">
+                <field name="day_of_payment" string="Payment day"/>
+            </field>
+
+            <!-- Add Discounts group after purchase group -->
+            <group name="purchase" position="after">
+                <group string="Discounts">
+                    <field name="discount_albara" string="Discount Albara" widget="percentage"/>
+                    <field name="discount_factura" string="Discount Factura" widget="percentage"/>
+                    <field name="discount_rappel" string="Discount Rappel" widget="percentage"/>
+                </group>
+            </group>
+
+            <!-- Add Routes group after purchase group -->
+            <group name="purchase" position="after">
+                <group string="Routes">
+                    <field name="delivery_route_id" string="Delivery Route"/>
+                    <field name="salesperson_route_id" string="Salesperson Route"/>
+                </group>
+            </group>
+
+            <!-- Add new tab with the title "Extra Info" -->
+            <notebook position="inside">
+                <page string="Discounts">
+                    <group>
+                        <field name="property_product_pricelist" string="Pricelist"/>
+                        <field name="pricelist_item_ids" readonly="1"/>
+                    </group>
+                </page>
+            </notebook>
+
+        </field>
+    </record>
+
+
+</odoo>

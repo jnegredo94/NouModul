@@ -1,0 +1,89 @@
+<odoo>
+
+    <!-- View for Factures history line Form  -->
+    <record id="view_factures_salesperson_history_form_line" model="ir.ui.view">
+        <field name="name">factures.salesperson.history.form.line</field>
+        <field name="model">factures.salesperson.history.line</field>
+        <field name="arch" type="xml">
+            <form string="Factures history">
+                <group>
+                    <field name="product_id"/>
+                    <field name="product_qty"/>
+                    <field name="product_packaging_qty"/>
+                    <field name="product_packaging" />
+                    <field name="qty_packaging" readonly="product_packaging" force_save="1"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- View for Factures history line tree -->
+    <record id="view_factures_salesperson_history_tree_line" model="ir.ui.view">
+        <field name="name">factures.salesperson.history.tree.line</field>
+        <field name="model">factures.salesperson.history.line</field>
+        <field name="arch" type="xml">
+            <tree string="Factures history" editable="bottom">
+                <field name="product_id"/>
+                <field name="product_qty"/>
+                <field name="product_packaging_qty"/>
+                <field name="product_packaging"/>
+                <field name="qty_packaging" readonly="product_packaging" force_save="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- View for Factures history Form -->
+    <record id="view_factures_salesperson_history_form" model="ir.ui.view">
+        <field name="name">factures.salesperson.history.form</field>
+        <field name="model">factures.salesperson.history</field>
+        <field name="arch" type="xml">
+            <form string="Salesperson history">
+                <sheet>
+                    <group>
+                        <field name="partner_id"/>
+                        <field name="salesperson_route_id"/>
+                        <field name="date"/>
+                    </group>
+                    <notebook>
+                        <page name="Items" string="Items">
+                            <field name="factures_salesperson_history_lines"/>
+                                
+                        </page>
+                    </notebook>
+
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- View for Factures history tree -->
+    <record id="view_factures_salesperson_history_tree" model="ir.ui.view">
+        <field name="name">factures.salesperson.history.tree</field>
+        <field name="model">factures.salesperson.history</field>
+        <field name="arch" type="xml">
+            <tree string="Factures history">
+                <field name="partner_id"/>
+                <field name="salesperson_route_id"/>
+                <field name="date"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- Action for Factures history -->
+    <record id="factures_salesperson_history_action" model="ir.actions.act_window">
+        <field name="name">Factures History</field>
+        <field name="res_model">factures.salesperson.history</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- Menu Item for Factures history -->
+    <record id="factures_salesperson_history_menuitem" model="ir.ui.menu">
+        <field name="name">See route history</field>
+        <field name="action" ref="factures_salesperson_history_action"/>
+        <field name="sequence" eval="20"/>
+        <field name="parent_id" ref="menu_factures_salesperson_routes_see"/>
+    </record>
+</odoo>

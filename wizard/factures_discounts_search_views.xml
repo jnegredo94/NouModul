@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="factures_discounts_search_view_form" model="ir.ui.view">
+        <field name="name">factures.discounts.search.view.form</field>
+        <field name="model">factures.discounts.search</field>
+        <field name="arch" type="xml">
+            <form string="Search discounts">
+                <group>
+                    <field name="partner_id" string="Partner"/>
+                </group>
+                <notebook>
+                    <page name="discounts" string="Discounts">
+                        <field name="pricelist_item_ids"/>
+                    </page>
+                </notebook>
+                <footer>
+                    <button string="Done" class="btn-primary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="factures_discounts_search_action" model="ir.actions.act_window">
+        <field name="name">Search discounts</field>
+        <field name="res_model">factures.discounts.search</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Menu Item for Creating Routes -->
+    <record id="factures_discounts_search_menuitem" model="ir.ui.menu">
+        <field name="name">Search discounts</field>
+        <field name="action" ref="factures_discounts_search_action"/>
+        <field name="parent_id" ref="sale.sale_menu_root"/>
+    </record>
+
+</odoo>

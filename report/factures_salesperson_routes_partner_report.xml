@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<odoo>
+    <template id="report_factures_salesperson_routes_group_by_partner">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <h2>
+                            <strong>
+                                <span t-field="o.salesperson_route_id"/>
+                            </strong>
+                            
+                            </h2>
+                            <h4>
+                            <span t-esc="o.start_date.strftime('%d-%m-%Y')"/>
+                            <span> to </span>
+                            <span t-esc="o.end_date.strftime('%d-%m-%Y')"/>
+                            </h4>
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>Partner</th>
+                                    <th>Quantities</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="o.group_by_partner()" t-as="partner">
+                                    <tr>
+                                        <td>
+                                            <span t-esc="partner[0][1]"/>
+                                        </td>
+                                        <td>
+                                            <t t-foreach="partner[1]" t-as="partner_id_quantity">
+                                                <span t-esc="partner_id_quantity[1]"/>
+                                                <span t-esc="partner_id_quantity[2]"/>
+                                                <br/>
+                                            </t>
+                                        </td>
+                                    </tr>
+
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                    <style>
+                    .page {
+                        page-break-after: always;
+                    }
+                    </style>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

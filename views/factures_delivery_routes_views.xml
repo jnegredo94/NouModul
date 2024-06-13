@@ -1,0 +1,49 @@
+<odoo>
+    <!-- View for Factures Routes Tree -->
+    <record id="view_factures_delivery_routes_tree" model="ir.ui.view">
+        <field name="name">factures.delivery.routes.tree</field>
+        <field name="model">factures.delivery.routes</field>
+        <field name="arch" type="xml">
+            <tree string="Factures Routes">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="active"  widget="boolean_toggle"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- View for Factures Routes Form -->
+    <record id="view_factures_delivery_routes_form" model="ir.ui.view">
+        <field name="name">factures.delivery.routes.form</field>
+        <field name="model">factures.delivery.routes</field>
+        <field name="arch" type="xml">
+            <form string="Factures Routes">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="description"/>
+                        <field name="active" widget="boolean_toggle"/>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action for Factures Routes -->
+    <record id="factures_delivery_routes_action" model="ir.actions.act_window">
+        <field name="name">Routes</field>
+        <field name="res_model">factures.delivery.routes</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'active_test': False}</field> <!-- Display even the inactive lines -->
+    </record>
+
+    <!-- Menu Item for Factures Routes -->
+    <record id="factures_delivery_routes_menuitem" model="ir.ui.menu">
+        <field name="name">Configurar Routes</field>
+        <field name="action" ref="factures_delivery_routes_action"/>
+        <field name="sequence" eval="15"/>
+        <field name="parent_id" ref="menu_factures_delivery_routes_see"/>
+    </record>
+</odoo>

@@ -1,0 +1,97 @@
+<odoo>
+    <!-- View for Routes -->
+    <record id="factures_delivery_routes_generated_view_form" model="ir.ui.view">
+        <field name="name">factures.delivery.routes.generated.tree</field>
+        <field name="model">factures.delivery.routes.generated</field>
+        <field name="arch" type="xml">
+            <tree string="Routes">
+                <field name="route_id"/>
+                <field name="date"/>
+                <field name="status" readonly="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View for Routes -->
+    <record id="factures_delivery_routes_generated_view_tree" model="ir.ui.view">
+        <field name="name">factures.delivery.routes.generated.form</field>
+        <field name="model">factures.delivery.routes.generated</field>
+        <field name="arch" type="xml">
+            <form string="Routes">
+            <header>
+                <button string="Mark as delivered" type="object" name="mark_as_delivered" class="oe_highlight"/>
+                <button string="Partial delivery" type="object" name="partial_deliver"/>
+            </header>
+                <h1>
+                    <field name="route_id" readonly="1"/>
+                    </h1>
+                    <group>
+                    <field name="date" readonly="1"/>
+                    <field name="status" />
+                    </group>
+                
+                <notebook>
+                    <page name="Quotations" string="Quotations">
+                        <field name="quotation_ids" options="{'no_create': True, 'no_create_edit':True}" readonly="status == 'tancat'"/>
+                    </page>
+                </notebook>
+            </form>
+        </field>
+    </record>
+
+    <!--PDF report group by product-->
+    <record id="report_routes_product" model="ir.actions.report">
+        <field name="name">Delivery Routes Product</field>
+        <field name="model">factures.delivery.routes.generated</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">factures.report_factures_delivery_routes_group_by_product</field>
+        <field name="report_file">factures.report_factures_delivery_routes_group_by_product</field>
+        <field name="print_report_name">'%s %s' % ((object.route_id.name).replace('/',''), object.date.strftime("%d-%m-%Y-"))</field> 
+        <field name="binding_model_id" ref="model_factures_delivery_routes_generated"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <!--PDF report group by partner-->
+    <record id="report_routes_partner" model="ir.actions.report">
+        <field name="name">Delivery Routes Partner</field>
+        <field name="model">factures.delivery.routes.generated</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">factures.report_factures_delivery_routes_group_by_partner</field>
+        <field name="report_file">factures.report_factures_delivery_routes_group_by_partner</field>
+        <field name="print_report_name">'%s %s' % ((object.route_id.name).replace('/',''), object.date.strftime("%d-%m-%Y-"))</field> 
+        <field name="binding_model_id" ref="model_factures_delivery_routes_generated"/>
+        <field name="binding_type">report</field>
+    </record>
+
+
+    <!-- Action for Generated Routes -->
+    <record id="factures_delivery_routes_generation_action" model="ir.actions.act_window">
+        <field name="name">Delivery routes</field>
+        <field name="res_model">factures.delivery.routes.generated</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu for Routes -->
+    <record id="menu_factures_routes" model="ir.ui.menu">
+        <field name="name">Routes</field>
+        <field name="parent_id" ref="sale.sale_menu_root"/>
+        <field name="sequence" eval="15"/>
+        <field name="action" ref="factures_delivery_routes_generation_action"/>
+    </record>
+
+    <record id="menu_factures_delivery_routes_see" model="ir.ui.menu">
+        <field name="name">Delivery routes</field>
+        <field name="parent_id" ref="menu_factures_routes"/>
+        <field name="sequence" eval="5"/>
+        <field name="action" ref="factures_delivery_routes_generation_action"/>
+    </record>
+
+    <!-- Submenu for See Routes -->
+    <record id="menu_factures_delivery_routes_sub" model="ir.ui.menu">
+        <field name="name">See delivery routes</field>
+        <field name="parent_id" ref="menu_factures_delivery_routes_see"/>
+        <field name="sequence" eval="5"/>
+        <field name="action" ref="factures_delivery_routes_generation_action"/>
+    </record>
+
+</odoo>
